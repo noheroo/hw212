@@ -22,21 +22,33 @@ public class CalcController {
 
     @GetMapping ( "/plus")
     public String plus(int num1, int num2) {
-        return calcService.plus(num1,num2);
+        int result = calcService.plus(num1,num2);
+        return generateFinalMessage(num1, num2, "+", result);
     }
 
     @GetMapping ( "/minus")
     public String minus(int num1, int num2) {
-        return calcService.minus(num1,num2);
+        int result = calcService.minus(num1,num2);
+        return generateFinalMessage(num1, num2, "-", result);
     }
 
     @GetMapping ( "/multiply")
     public String multiply(int num1, int num2) {
-        return calcService.multiply(num1,num2);
+        int result = calcService.multiply(num1,num2);
+        return generateFinalMessage(num1, num2, "*", result);
     }
 
     @GetMapping ( "/divide")
     public String divide(int num1, int num2) {
-        return calcService.divide(num1,num2);
+        float result = calcService.divide(num1,num2);
+        return generateFinalMessageForDivide(num1, num2, result);
+    }
+
+    private String generateFinalMessage(int num1, int num2, String action, int result) {
+        return num1 + " " + action + " " + num2 + " = " + result;
+    }
+
+    private String generateFinalMessageForDivide(int num1, int num2, float result) {
+        return num1 + " / " + num2 + " = " + result;
     }
 }
